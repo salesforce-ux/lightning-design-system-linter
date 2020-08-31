@@ -1,102 +1,154 @@
 import { AssistantPackage, RuleDefinition } from '@sketch-hq/sketch-assistant-types'
 import _ from 'lodash'
 
-const textColorTokens = {
-  colorGray11: 'rgb(62, 62, 60)',
-  colorGray12: 'rgb(43, 40, 38)',
-  colorGray13: 'rgb(8, 7, 7)',
-  colorGray1: 'rgb(255, 255, 255)',
-  colorGray2: 'rgb(250, 250, 249)',
-  colorGray3: 'rgb(243, 242, 242)',
-  colorGray4: 'rgb(236, 235, 234)',
-  colorGray5: 'rgb(221, 219, 218)',
-  colorGray6: 'rgb(201, 199, 197)',
-  colorGray7: 'rgb(176, 173, 171)',
-  colorGray8: 'rgb(150, 148, 146)',
-  colorGray9: 'rgb(112, 110, 107)',
-  colorGray10: 'rgb(81, 79, 77)',
-  colorTextActionLabel: 'rgb(62, 62, 60)',
-  colorTextLinkInverse: 'rgb(255, 255, 255)',
-  colorTextLinkInverseActive: 'rgba(255, 255, 255, 0.5)',
-  colorTextActionLabelActive: 'rgb(8, 7, 7)',
-  colorTextWarning: 'rgb(255, 183, 93)',
-  colorTextLinkFocus: 'rgb(0, 95, 178)',
-  colorTextDestructiveHover: 'rgb(161, 43, 43)',
-  colorTextLinkDisabled: 'rgb(22, 50, 92)',
-  colorTextDefault: 'rgb(8, 7, 7)',
-  colorTextDestructive: 'rgb(194, 57, 52)',
-  colorTextLinkHover: 'rgb(0, 95, 178)',
-  colorTextSuccess: 'rgb(2, 126, 70)',
-  colorTextWeak: 'rgb(62, 62, 60)',
-  colorTextPlaceholderInverse: 'rgb(236, 235, 234)',
-  colorTextLink: 'rgb(0, 109, 204)',
-  colorTextWarningAlt: 'rgb(132, 72, 0)',
-  colorTextIconDefault: 'rgb(112, 110, 107)',
-  colorTextBrand: 'rgb(21, 137, 238)',
-  colorTextError: 'rgb(194, 57, 52)',
-  colorTextCustomer: 'rgb(255, 154, 60)',
-  colorTextBrandPrimary: 'rgb(255, 255, 255)',
-  colorTextLinkActive: 'rgb(0, 57, 107)',
-  colorTextRequired: 'rgb(194, 57, 52)',
-  colorTextLinkInverseDisabled: 'rgba(255, 255, 255, 0.15)',
-  colorTextInverse: 'rgb(255, 255, 255)',
-  colorTextPlaceholder: 'rgb(112, 110, 107)',
-  colorTextInverseWeak: 'rgb(176, 173, 171)',
-  colorTextLinkInverseHover: 'rgba(255, 255, 255, 0.75)',
-  colorTextSuccessInverse: 'rgb(75, 202, 129)',
-  colorTextLabel: 'rgb(62, 62, 60)',
-}
+import textColorTokens from './design-tokens/color/text'
+import borderColorTokens from './design-tokens/color/border'
+import fontSizeTokens from './design-tokens/font/size'
+import backgroundColorTokens from './design-tokens/color/background'
 
-const textColorValues = Object.keys(textColorTokens).map((key: string) => {
-  let split = (textColorTokens as { [key: string]: any })[key].split(',').map((attr: string) =>
-    parseInt(
-      attr
-        .replace(/rgba|rgb/g, '')
-        .replace(/\(/g, '')
-        .replace(/\)/g, ''),
-    ),
-  )
-  return split
-})
+const parseFontSizes = (rawTokens: Object) =>
+  Object.keys(rawTokens).map((key: string) => {
+    const asREM = (rawTokens as { [key: string]: any })[key].replace('rem', '')
+    return asREM * 16
+  })
 
-const extractTextColor = (layer: any) => {
-  let colorAttribute = layer.style?.textStyle?.encodedAttributes.MSAttributedStringColorAttribute
-  return [
-    Math.round(256 * colorAttribute.red),
-    Math.round(256 * colorAttribute.green),
-    Math.round(256 * colorAttribute.blue),
-  ]
-}
+const parseColors = (rawTokens: Object) =>
+  Object.keys(rawTokens).map((key: string) => {
+    let split = (rawTokens as { [key: string]: any })[key].split(',').map((attr: string) =>
+      parseFloat(
+        attr
+          .replace(/rgba|rgb/g, '')
+          .replace(/\(/g, '')
+          .replace(/\)/g, ''),
+      ),
+    )
 
-const colors: RuleDefinition = {
+    // add alpha of 1
+    if (split.length < 4) split.push(1)
+    return split
+  })
+
+const fontFamily: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
+
     for (const layer of utils.objects.text) {
-      let c2 = extractTextColor(layer)
+      const fontName =
+        layer.style?.textStyle?.encodedAttributes?.MSAttributedStringFontAttribute?.attributes?.name
+      if (!fontName?.toLowerCase().includes('salesforce')) utils.report(`Invalid`, layer)
+    }
+  },
+  name: 'slds-assistant/fontSizes',
+  title: 'Invalid Font',
+  description: 'Reports text using an invalid font',
+}
 
-      let shouldReport = true
-      textColorValues.forEach((c) => {
-        if (_.isEqual(c, c2)) shouldReport = false
-      })
+const fontSizes: RuleDefinition = {
+  rule: async (context) => {
+    const { utils } = context
+    const fontSizeValues = parseFontSizes(fontSizeTokens)
+    for (const layer of utils.objects.text) {
+      const size =
+        layer.style?.textStyle?.encodedAttributes?.MSAttributedStringFontAttribute?.attributes?.size
 
-      if (shouldReport) {
-        utils.report(`${layer.name} does not use a valid text color token.`, layer)
-        utils.report(`${c2}`)
+      if (!fontSizeValues.find((v) => v === size)) utils.report('Invalid', layer)
+    }
+  },
+  name: 'slds-assistant/fontSizes',
+  title: 'Invalid Font Size',
+  description: 'Reports text using invalid font size',
+}
+
+const borderColors: RuleDefinition = {
+  rule: async (context) => {
+    const { utils } = context
+    const borderColorValues = parseColors(borderColorTokens)
+
+    for (const layer of utils.objects.anyLayer) {
+      const borders = layer.style?.borders
+
+      if (borders && borders.length > 0) {
+        borders.forEach((b) => {
+          const borderRGBA = [
+            Math.round(b.color.red * 255),
+            Math.round(b.color.green * 255),
+            Math.round(b.color.blue * 255),
+            b.color.alpha,
+          ]
+          if (!borderColorValues.find((v) => _.isEqual(v, borderRGBA)))
+            utils.report(`Invalid`, layer)
+        })
       }
     }
   },
-  name: 'sketch-assistant-template/colors',
-  title: 'Invalid text color',
-  description: 'Reports a hello world message',
+  name: 'slds-assistant/borderColors',
+  title: 'Invalid Border Color',
+  description: 'Reports layer using invalid border color',
+}
+
+const backgroundColors: RuleDefinition = {
+  rule: async (context) => {
+    const { utils } = context
+    const backgroundColorValues = parseColors(backgroundColorTokens)
+
+    for (const layer of utils.objects.anyLayer) {
+      const fills = layer.style?.fills
+
+      if (fills && fills.length > 0) {
+        fills.forEach((b) => {
+          const fillRGBA = [
+            Math.round(b.color.red * 255),
+            Math.round(b.color.green * 255),
+            Math.round(b.color.blue * 255),
+            b.color.alpha,
+          ]
+          if (!backgroundColorValues.find((v) => _.isEqual(v, fillRGBA)))
+            utils.report(`Invalid`, layer)
+        })
+      }
+    }
+  },
+  name: 'slds-assistant/backgroundColors',
+  title: 'Invalid Background Color',
+  description: 'Reports layer using invalid fill',
+}
+
+const textColors: RuleDefinition = {
+  rule: async (context) => {
+    const { utils } = context
+    const textColorValues = parseColors(textColorTokens)
+
+    for (const layer of utils.objects.text) {
+      let colorAttribute =
+        layer.style?.textStyle?.encodedAttributes.MSAttributedStringColorAttribute
+
+      if (colorAttribute) {
+        const textRGBA = [
+          Math.round(255 * colorAttribute?.red),
+          Math.round(255 * colorAttribute?.green),
+          Math.round(255 * colorAttribute?.blue),
+          colorAttribute?.alpha,
+        ]
+        if (!textColorValues.find((v) => _.isEqual(v, textRGBA))) utils.report(`Invalid`, layer)
+      }
+    }
+  },
+  name: 'slds-assistant/textColors',
+  title: 'Invalid Text Color',
+  description: 'Reports text using invalid text color',
 }
 
 const assistant: AssistantPackage = async () => {
   return {
-    name: 'sketch-assistant-template',
-    rules: [colors],
+    name: 'slds-assistant',
+    rules: [textColors, backgroundColors, borderColors, fontSizes, fontFamily],
     config: {
       rules: {
-        'sketch-assistant-template/colors': { active: true },
+        'slds-assistant/textColors': { active: true },
+        'slds-assistant/backgroundColors': { active: true },
+        'slds-assistant/borderColors': { active: true },
+        'slds-assistant/fontSizes': { active: true },
+        'slds-assistant/fontFamily': { active: true },
       },
     },
   }
