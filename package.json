@@ -7,8 +7,8 @@
   "license": "MIT",
   "sketch-assistant": {
     "title": "Lightning Design System Assistant",
-    "description": "An assistant for the Lightning Design System",
-    "icon": ""
+    "description": "An assistant for the Salesforce Lightning Design System",
+    "icon": "https://user-images.githubusercontent.com/7698220/91777276-456a9c00-eba4-11ea-92bd-e2b1315ab270.png"
   },
   "author": {
     "name": "Salesforce"
