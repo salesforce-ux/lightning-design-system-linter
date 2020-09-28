@@ -1,20 +1,12 @@
 import { AssistantPackage, RuleDefinition } from '@sketch-hq/sketch-assistant-types'
 import _ from 'lodash'
 
-import textColorTokens from './design-tokens/color/text'
-import borderColorTokens from './design-tokens/color/border'
-import fontSizeTokens from './design-tokens/font/size'
-import backgroundColorTokens from './design-tokens/color/background'
+import { getBackgroundColors, getBorderColors, getTextColors, getFontSizes } from './token-utils'
 
-const parseFontSizes = (rawTokens: Object) =>
-  Object.keys(rawTokens).map((key: string) => {
-    const asREM = (rawTokens as { [key: string]: any })[key].replace('rem', '')
-    return asREM * 16
-  })
-
-const parseColors = (rawTokens: Object) =>
-  Object.keys(rawTokens).map((key: string) => {
-    let split = (rawTokens as { [key: string]: any })[key].split(',').map((attr: string) =>
+// parse rgba syntax and populate array
+const parseColors = (rawTokens: Array<string>) =>
+  rawTokens.map((key: string) => {
+    let split = key.split(',').map((attr: string) =>
       parseFloat(
         attr
           .replace(/rgba|rgb/g, '')
@@ -28,127 +20,165 @@ const parseColors = (rawTokens: Object) =>
     return split
   })
 
-const fontFamily: RuleDefinition = {
+// turn rgba percentages into values
+const getRgba = (colorObj: any) => {
+  return [
+    Math.round(255 * colorObj?.red),
+    Math.round(255 * colorObj?.green),
+    Math.round(255 * colorObj?.blue),
+    colorObj?.alpha,
+  ]
+}
+
+// given sketch class, return true if this layer should be linted
+const isValidLayer = (_class: string) =>
+  _class !== 'group' &&
+  _class !== 'symbolInstance' &&
+  _class !== 'symbolMaster' &&
+  _class !== 'page' &&
+  _class !== 'artboard'
+
+const tokenDescription =
+  'We recommend using predefined values represented by our design tokens wherever possible. This ensures consistency in design and helps with change management as our system evolves.'
+
+const textSldsFont: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
 
     for (const layer of utils.objects.text) {
       const fontName =
         layer.style?.textStyle?.encodedAttributes?.MSAttributedStringFontAttribute?.attributes?.name
-      if (!fontName?.toLowerCase().includes('salesforce')) utils.report(`Invalid`, layer)
+
+      if (isValidLayer(layer._class) && !fontName?.toLowerCase().includes('salesforce'))
+        utils.report(
+          `Consider installing and using Salesforce Sans in place of ${fontName}.`,
+          layer,
+        )
     }
   },
-  name: 'slds-assistant/fontSizes',
-  title: 'Invalid Font',
-  description: 'Reports text using an invalid font',
+  name: 'lightning-design-system-linter/text-slds-font',
+  title: 'Text should use the Salesforce Sans font family.',
+  description: tokenDescription,
 }
 
-const fontSizes: RuleDefinition = {
+const textSldsSize: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
-    const fontSizeValues = parseFontSizes(fontSizeTokens)
+    const fontSizeValues = getFontSizes()
+
     for (const layer of utils.objects.text) {
       const size =
         layer.style?.textStyle?.encodedAttributes?.MSAttributedStringFontAttribute?.attributes?.size
 
-      if (!fontSizeValues.find((v) => v === size)) utils.report('Invalid', layer)
+      if (isValidLayer(layer._class) && !fontSizeValues.find((v) => parseInt(v) === size))
+        utils.report(`${size} does not match a valid font size token.`, layer)
     }
   },
-  name: 'slds-assistant/fontSizes',
-  title: 'Invalid Font Size',
-  description: 'Reports text using invalid font size',
+  name: 'lightning-design-system-linter/text-slds-size',
+  title: 'Text sizes should match SLDS font size token values.',
+  description: tokenDescription,
 }
 
-const borderColors: RuleDefinition = {
+const borderSldsColor: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
-    const borderColorValues = parseColors(borderColorTokens)
+    const borderColorValues = parseColors(getBorderColors())
 
     for (const layer of utils.objects.anyLayer) {
       const borders = layer.style?.borders
 
-      if (borders && borders.length > 0) {
-        borders.forEach((b) => {
-          const borderRGBA = [
-            Math.round(b.color.red * 255),
-            Math.round(b.color.green * 255),
-            Math.round(b.color.blue * 255),
-            b.color.alpha,
-          ]
-          if (!borderColorValues.find((v) => _.isEqual(v, borderRGBA)))
-            utils.report(`Invalid`, layer)
+      if (isValidLayer(layer._class) && borders && borders.length > 0) {
+        borders.forEach((border) => {
+          const borderRgba = getRgba(border.color)
+
+          // Border must be enabled. Transparent borders are allowed.
+          if (
+            border.isEnabled &&
+            borderRgba[3] !== 0 &&
+            !borderColorValues.find((v) => _.isEqual(v, borderRgba))
+          )
+            utils.report(
+              `rgba(${borderRgba[0]},${borderRgba[1]},${borderRgba[2]},${borderRgba[3]}) does not match a valid border color token.`,
+              layer,
+            )
         })
       }
     }
   },
-  name: 'slds-assistant/borderColors',
-  title: 'Invalid Border Color',
-  description: 'Reports layer using invalid border color',
+  name: 'lightning-design-system-linter/border-slds-color',
+  title: 'Border colors should match SLDS border color token values.',
+  description: tokenDescription,
 }
 
-const backgroundColors: RuleDefinition = {
+const fillSldsColor: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
-    const backgroundColorValues = parseColors(backgroundColorTokens)
+
+    const backgroundColorValues = parseColors(getBackgroundColors())
 
     for (const layer of utils.objects.anyLayer) {
       const fills = layer.style?.fills
 
-      if (fills && fills.length > 0) {
-        fills.forEach((b) => {
-          const fillRGBA = [
-            Math.round(b.color.red * 255),
-            Math.round(b.color.green * 255),
-            Math.round(b.color.blue * 255),
-            b.color.alpha,
-          ]
-          if (!backgroundColorValues.find((v) => _.isEqual(v, fillRGBA)))
-            utils.report(`Invalid`, layer)
+      if (isValidLayer(layer._class) && fills && fills.length > 0) {
+        fills.forEach((fill) => {
+          const fillRgba = getRgba(fill.color)
+
+          // check for token match or transparency
+          if (
+            fill.isEnabled &&
+            fillRgba[3] !== 0 &&
+            !backgroundColorValues.find((v) => _.isEqual(v, fillRgba))
+          )
+            utils.report(
+              `rgba(${fillRgba[0]},${fillRgba[1]},${fillRgba[2]},${fillRgba[3]}) does not match a valid background color token.`,
+              layer,
+            )
         })
       }
     }
   },
-  name: 'slds-assistant/backgroundColors',
-  title: 'Invalid Background Color',
-  description: 'Reports layer using invalid fill',
+  name: 'lightning-design-system-linter/fill-slds-color',
+  title: 'Fill colors should match SLDS background color token values.',
+  description: tokenDescription,
 }
 
-const textColors: RuleDefinition = {
+const textSldsColor: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
-    const textColorValues = parseColors(textColorTokens)
+    const textColorValues = parseColors(getTextColors())
 
     for (const layer of utils.objects.text) {
       let colorAttribute =
         layer.style?.textStyle?.encodedAttributes.MSAttributedStringColorAttribute
 
-      if (colorAttribute) {
-        const textRGBA = [
-          Math.round(255 * colorAttribute?.red),
-          Math.round(255 * colorAttribute?.green),
-          Math.round(255 * colorAttribute?.blue),
-          colorAttribute?.alpha,
-        ]
-        if (!textColorValues.find((v) => _.isEqual(v, textRGBA))) utils.report(`Invalid`, layer)
+      if (isValidLayer(layer._class) && colorAttribute) {
+        const textRgba = getRgba(colorAttribute)
+
+        // check for token match or transparency
+        if (textRgba[3] !== 0 && !textColorValues.find((v) => _.isEqual(v, textRgba)))
+          utils.report(
+            `rgba(${textRgba[0]},${textRgba[1]},${textRgba[2]},${textRgba[3]}) does not match a valid text color token.`,
+            layer,
+          )
       }
     }
   },
-  name: 'slds-assistant/textColors',
-  title: 'Invalid Text Color',
-  description: 'Reports text using invalid text color',
+  name: 'lightning-design-system-linter/text-slds-color',
+  title: `Text colors should match SLDS text color token values.`,
+  description: tokenDescription,
 }
 
 const assistant: AssistantPackage = async () => {
   return {
-    name: 'slds-assistant',
-    rules: [textColors, backgroundColors, borderColors, fontSizes, fontFamily],
+    name: 'lightning-design-system-linter',
+    rules: [textSldsColor, fillSldsColor, borderSldsColor, textSldsSize, textSldsFont],
     config: {
       rules: {
-        'slds-assistant/textColors': { active: true },
-        'slds-assistant/backgroundColors': { active: true },
-        'slds-assistant/borderColors': { active: true },
-        'slds-assistant/fontSizes': { active: true },
-        'slds-assistant/fontFamily': { active: true },
+        'lightning-design-system-linter/text-slds-color': { active: true },
+        'lightning-design-system-linter/fill-slds-color': { active: true },
+        'lightning-design-system-linter/border-slds-color': { active: true },
+        'lightning-design-system-linter/text-slds-size': { active: true },
+        'lightning-design-system-linter/text-slds-font': { active: true },
       },
     },
   }
