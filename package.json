@@ -1,6 +1,6 @@
 {
   "name": "lightning-design-system-linter",
-  "homepage": "https://lightningdesignsystem.com/design-tokens",
+  "homepage": "https://github.com/salesforce-ux/lightning-design-system-linter",
   "version": "1.0.0",
   "main": "dist/index.js",
   "sketch": "dist/sketch.js",
@@ -38,7 +38,6 @@
     "@types/node": "14.0.22",
     "jest": "26.1.0",
     "lodash": "^4.17.20",
-    "node-fetch": "2.6.0",
     "prettier": "2.0.5",
     "ts-jest": "26.1.2",
     "typescript": "3.9.6",
@@ -46,7 +45,6 @@
     "webpack-cli": "3.3.12"
   },
   "dependencies": {
-    "@sketch-hq/sketch-assistant-types": "6.0.0",
-    "hex-rgb": "^4.2.0"
+    "@sketch-hq/sketch-assistant-types": "6.0.0"
   }
 }
