@@ -4,9 +4,13 @@ This assistant lints text colors, border colors, fills, text sizes, and font fam
 Spring '21 version of the Salesforce Lightning Design System
 [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
 
-| Linter Version                                                                                                | SLDS Release |
-| ------------------------------------------------------------------------------------------------------------- | ------------ |
-| [1.0.3](https://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz) | Spring '21   |
+## Versions
+
+Make sure you are validating against the correct SLDS release.
+
+| Linter Version | SLDS Release | URL (Copy and paste in browser to download.) |
+| ----- | ------------ | --- |
+| 1.0.3 | Spring '21   | sketch://add-assistant?url=h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz |
 
 ## Linter Rules
 
