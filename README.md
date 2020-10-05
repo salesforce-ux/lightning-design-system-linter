@@ -6,7 +6,7 @@ Salesforce Lightning Design System
 
 ## Linter Rules
 
-<h3 id='fill-color'>Fill Color</h3>
+<h3 id='lightning-design-system-linter/fill-color'>Fill Color</h3>
 
 Fill colors should match SLDS background or generic color token values.
 
@@ -17,7 +17,7 @@ Fill colors should match SLDS background or generic color token values.
 
 ---
 
-### Border Color
+<h3 id='lightning-design-system-linter/border-color'>Border Color</h3>
 
 Border colors should match SLDS border or generic color token values.
 
@@ -28,7 +28,7 @@ Border colors should match SLDS border or generic color token values.
 
 ---
 
-### Text Color
+<h3 id='lightning-design-system-linter/text-color'>Text Color</h3>
 
 Text colors should match SLDS text or generic color token values.
 
@@ -39,7 +39,7 @@ Text colors should match SLDS text or generic color token values.
 
 ---
 
-### Text Size
+<h3 id='lightning-design-system-linter/text-size'>Text Size</h3>
 
 Text sizes should match SLDS font size token values.
 
@@ -48,7 +48,7 @@ Text sizes should match SLDS font size token values.
 
 ---
 
-### Font Family
+<h3 id='lightning-design-system-linter/font'>Font Family</h3>
 
 All text should use the Salesforce Sans font family.
 
