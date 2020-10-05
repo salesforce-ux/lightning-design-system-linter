@@ -4,6 +4,10 @@ This assistant lints text colors, border colors, fills, and font families agains
 Salesforce Lightning Design System
 [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
 
+| Linter Version                                                                                                                                    | SLDS Release |
+|---------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| [1.0.3](https://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz) | Spring '21   |
+
 ## Linter Rules
 
 <h3 id='lightning-design-system-linter/fill-color'>Fill Color</h3>
