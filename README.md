@@ -6,7 +6,7 @@ Salesforce Lightning Design System
 
 ## Linter Rules
 
-### Fill Color
+<h3 id='fill-color'>Fill Color</h3>
 
 Fill colors should match SLDS background or generic color token values.
 
