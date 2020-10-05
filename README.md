@@ -1,11 +1,11 @@
 # Lightning Design System Linter for Sketch
 
-This assistant lints text colors, border colors, fills, and font families against the latest
-Salesforce Lightning Design System
+This assistant lints text colors, border colors, fills, text sizes, and font families against the
+Spring '21 version of the Salesforce Lightning Design System
 [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
 
-| Linter Version                                                                                                                                    | SLDS Release |
-|---------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| Linter Version                                                                                                | SLDS Release |
+| ------------------------------------------------------------------------------------------------------------- | ------------ |
 | [1.0.3](https://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz) | Spring '21   |
 
 ## Linter Rules

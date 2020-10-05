@@ -82,7 +82,7 @@ const textSldsSize: RuleDefinition = {
         layer.style?.textStyle?.encodedAttributes?.MSAttributedStringFontAttribute?.attributes?.size
 
       if (isValidLayer(layer, utils) && !fontSizeValues.find((v) => parseInt(v) === size))
-        utils.report(`${size} does not match a valid ${SLDS_RELEASE} font size token.`, layer)
+        utils.report(`${size} does not match a valid font size token.`, layer)
     }
   },
   name: 'lightning-design-system-linter/text-size',
@@ -109,7 +109,7 @@ const borderSldsColor: RuleDefinition = {
             !borderColorValues.find((v) => _.isEqual(v, borderRgba))
           )
             utils.report(
-              `rgba(${borderRgba[0]},${borderRgba[1]},${borderRgba[2]},${borderRgba[3]}) does not match a valid ${SLDS_RELEASE} border or generic color token.`,
+              `rgba(${borderRgba[0]},${borderRgba[1]},${borderRgba[2]},${borderRgba[3]}) does not match a valid border or generic color token.`,
               layer,
             )
         })
@@ -141,7 +141,7 @@ const fillSldsColor: RuleDefinition = {
             !backgroundColorValues.find((v) => _.isEqual(v, fillRgba))
           )
             utils.report(
-              `rgba(${fillRgba[0]},${fillRgba[1]},${fillRgba[2]},${fillRgba[3]}) does not match a valid ${SLDS_RELEASE} background or generic color token.`,
+              `rgba(${fillRgba[0]},${fillRgba[1]},${fillRgba[2]},${fillRgba[3]}) does not match a valid background or generic color token.`,
               layer,
             )
         })
@@ -168,7 +168,7 @@ const textSldsColor: RuleDefinition = {
         // check for token match or transparency
         if (textRgba[3] !== 0 && !textColorValues.find((v) => _.isEqual(v, textRgba)))
           utils.report(
-            `rgba(${textRgba[0]},${textRgba[1]},${textRgba[2]},${textRgba[3]}) does not match a valid ${SLDS_RELEASE} text or generic color token.`,
+            `rgba(${textRgba[0]},${textRgba[1]},${textRgba[2]},${textRgba[3]}) does not match a valid text or generic color token.`,
             layer,
           )
       }

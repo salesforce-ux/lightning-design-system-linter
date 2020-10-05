@@ -1,13 +1,13 @@
 {
   "name": "lightning-design-system-linter",
   "homepage": "https://github.com/salesforce-ux/lightning-design-system-linter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "sketch": "dist/sketch.js",
   "license": "MIT",
   "sketch-assistant": {
     "title": "Lightning Design System Linter",
-    "description": "A Sketch Assistant for the Salesforce Lightning Design System",
+    "description": "[Spring '21 release] A Sketch Assistant for the Salesforce Lightning Design System.",
     "icon": "https://user-images.githubusercontent.com/7698220/91777276-456a9c00-eba4-11ea-92bd-e2b1315ab270.png"
   },
   "author": {
