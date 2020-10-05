@@ -3,6 +3,8 @@ import _ from 'lodash'
 
 import { getBackgroundColors, getBorderColors, getTextColors, getFontSizes } from './token-utils'
 
+const SLDS_RELEASE = "Spring '21"
+
 // parse rgba syntax and populate array
 const parseColors = (rawTokens: Array<string>) =>
   rawTokens.map((key: string) => {
@@ -66,7 +68,7 @@ const textSldsFont: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/font',
-  title: 'Text should use the Salesforce Sans font family.',
+  title: `Text should use the Salesforce Sans font family. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -80,11 +82,11 @@ const textSldsSize: RuleDefinition = {
         layer.style?.textStyle?.encodedAttributes?.MSAttributedStringFontAttribute?.attributes?.size
 
       if (isValidLayer(layer, utils) && !fontSizeValues.find((v) => parseInt(v) === size))
-        utils.report(`${size} does not match a valid font size token.`, layer)
+        utils.report(`${size} does not match a valid ${SLDS_RELEASE} font size token.`, layer)
     }
   },
   name: 'lightning-design-system-linter/text-size',
-  title: 'Text sizes should match SLDS font size token values.',
+  title: `Text sizes should match SLDS font size token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -107,7 +109,7 @@ const borderSldsColor: RuleDefinition = {
             !borderColorValues.find((v) => _.isEqual(v, borderRgba))
           )
             utils.report(
-              `rgba(${borderRgba[0]},${borderRgba[1]},${borderRgba[2]},${borderRgba[3]}) does not match a valid border or generic color token.`,
+              `rgba(${borderRgba[0]},${borderRgba[1]},${borderRgba[2]},${borderRgba[3]}) does not match a valid ${SLDS_RELEASE} border or generic color token.`,
               layer,
             )
         })
@@ -115,7 +117,7 @@ const borderSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/border-color',
-  title: 'Border colors should match SLDS border or generic color token values.',
+  title: `Border colors should match SLDS border or generic color token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -139,7 +141,7 @@ const fillSldsColor: RuleDefinition = {
             !backgroundColorValues.find((v) => _.isEqual(v, fillRgba))
           )
             utils.report(
-              `rgba(${fillRgba[0]},${fillRgba[1]},${fillRgba[2]},${fillRgba[3]}) does not match a valid background or generic color token.`,
+              `rgba(${fillRgba[0]},${fillRgba[1]},${fillRgba[2]},${fillRgba[3]}) does not match a valid ${SLDS_RELEASE} background or generic color token.`,
               layer,
             )
         })
@@ -147,7 +149,7 @@ const fillSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/fill-color',
-  title: 'Fill colors should match SLDS background or generic color token values.',
+  title: `Fill colors should match SLDS background or generic color token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -166,14 +168,14 @@ const textSldsColor: RuleDefinition = {
         // check for token match or transparency
         if (textRgba[3] !== 0 && !textColorValues.find((v) => _.isEqual(v, textRgba)))
           utils.report(
-            `rgba(${textRgba[0]},${textRgba[1]},${textRgba[2]},${textRgba[3]}) does not match a valid text or generic color token.`,
+            `rgba(${textRgba[0]},${textRgba[1]},${textRgba[2]},${textRgba[3]}) does not match a valid ${SLDS_RELEASE} text or generic color token.`,
             layer,
           )
       }
     }
   },
   name: 'lightning-design-system-linter/text-color',
-  title: `Text colors should match SLDS text or generic color token values.`,
+  title: `Text colors should match SLDS text or generic color token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
