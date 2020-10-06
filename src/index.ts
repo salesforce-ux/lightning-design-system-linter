@@ -49,8 +49,7 @@ const isValidLayer = (layer: any, _utils: RuleUtils) => {
   )
 }
 
-const tokenDescription =
-  'We recommend using predefined values represented by our design tokens wherever possible. This ensures consistency in design and helps with change management as our system evolves.'
+const tokenDescription = `We recommend using predefined values represented by our design tokens wherever possible. This linter version is using the ${SLDS_RELEASE} set of design tokens.`
 
 const textSldsFont: RuleDefinition = {
   rule: async (context) => {
@@ -68,7 +67,7 @@ const textSldsFont: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/font',
-  title: `Text should use the Salesforce Sans font family. (${SLDS_RELEASE})`,
+  title: `Text should use the Salesforce Sans font family.`,
   description: tokenDescription,
 }
 
@@ -86,7 +85,7 @@ const textSldsSize: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/text-size',
-  title: `Text sizes should match SLDS font size token values. (${SLDS_RELEASE})`,
+  title: `Text sizes should match SLDS font size token values.`,
   description: tokenDescription,
 }
 
@@ -117,7 +116,7 @@ const borderSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/border-color',
-  title: `Border colors should match SLDS border or generic color token values. (${SLDS_RELEASE})`,
+  title: `Border colors should match SLDS border or generic color token values.`,
   description: tokenDescription,
 }
 
@@ -149,7 +148,7 @@ const fillSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/fill-color',
-  title: `Fill colors should match SLDS background or generic color token values. (${SLDS_RELEASE})`,
+  title: `Fill colors should match SLDS background or generic color token values.`,
   description: tokenDescription,
 }
 
@@ -175,7 +174,7 @@ const textSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/text-color',
-  title: `Text colors should match SLDS text or generic color token values. (${SLDS_RELEASE})`,
+  title: `Text colors should match SLDS text or generic color token values.`,
   description: tokenDescription,
 }
 

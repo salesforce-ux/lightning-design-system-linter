@@ -8,9 +8,9 @@ Spring '21 version of the Salesforce Lightning Design System
 
 Make sure you are validating against the correct SLDS release.
 
-| Linter Version | SLDS Release | URL (Copy and paste in browser to download.) |
-| ----- | ------------ | --- |
-| 1.0.3 | Spring '21   | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz |
+| Linter Version | SLDS Release | URL (Copy and paste in browser to download.)                                                                                                      |
+| -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0.4          | Spring '21   | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.4.tgz |
 
 ## Linter Rules
 
