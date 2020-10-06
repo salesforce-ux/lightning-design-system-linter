@@ -10,7 +10,7 @@ Make sure you are validating against the correct SLDS release.
 
 | Linter Version | SLDS Release | URL (Copy and paste in browser to download.) |
 | ----- | ------------ | --- |
-| 1.0.3 | Spring '21   | sketch://add-assistant?url=h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz |
+| 1.0.3 | Spring '21   | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.3.tgz |
 
 ## Linter Rules
 
