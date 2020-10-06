@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import { getBackgroundColors, getBorderColors, getTextColors, getFontSizes } from './token-utils'
 
-const SLDS_RELEASE = "Spring '21"
+const SLDS_RELEASE = "Winter '21"
 
 // parse rgba syntax and populate array
 const parseColors = (rawTokens: Array<string>) =>
@@ -85,7 +85,7 @@ const textSldsSize: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/text-size',
-  title: `Text sizes should match SLDS font size token values.`,
+  title: `Text sizes should match SLDS font size token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -116,7 +116,7 @@ const borderSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/border-color',
-  title: `Border colors should match SLDS border or generic color token values.`,
+  title: `Border colors should match SLDS border or generic color token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -148,7 +148,7 @@ const fillSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/fill-color',
-  title: `Fill colors should match SLDS background or generic color token values.`,
+  title: `Fill colors should match SLDS background or generic color token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
@@ -174,7 +174,7 @@ const textSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/text-color',
-  title: `Text colors should match SLDS text or generic color token values.`,
+  title: `Text colors should match SLDS text or generic color token values. (${SLDS_RELEASE})`,
   description: tokenDescription,
 }
 
