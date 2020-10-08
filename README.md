@@ -6,7 +6,7 @@ Winter '21 version of the Salesforce Lightning Design System
 
 ## About Sketch Assistants
 
-First time using a Sketch Assitant? Read Sketch's help documentation [here](https://www.sketch.com/docs/assistants/). 
+First time using a Sketch Assistant? Read Sketch's help documentation [here](https://www.sketch.com/docs/assistants/). 
 
 ## Versions
 
