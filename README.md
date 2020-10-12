@@ -6,15 +6,16 @@ Winter '21 version of the Salesforce Lightning Design System
 
 ## About Sketch Assistants
 
-First time using a Sketch Assistant? Read Sketch's help documentation [here](https://www.sketch.com/docs/assistants/). 
+First time using a Sketch Assistant?
+[Read Sketch's help documentation](https://www.sketch.com/docs/assistants/).
 
 ## Versions
 
 Make sure you are validating against the correct SLDS release.
 
-| Linter Version | SLDS Release | URL (Copy and paste in browser to download.)                                                                                                      |
-| -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.0.5          | Winter '21   | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.5.tgz |
+| Linter Version | SLDS Release    | URL (Copy and paste in browser to download.)                                                                                                      |
+| -------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0.5          | Winter '21 Only | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.5.tgz |
 
 ## Linter Rules
 
@@ -22,10 +23,8 @@ Make sure you are validating against the correct SLDS release.
 
 Fill colors should match SLDS background or generic color token values.
 
-- See available **background color** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-background-color).
-- See available **generic color** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-color).
+- [See available **background color** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-background-color)
+- [See available **generic color** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-color)
 
 ---
 
@@ -33,10 +32,8 @@ Fill colors should match SLDS background or generic color token values.
 
 Border colors should match SLDS border or generic color token values.
 
-- See available **border color** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-border-color).
-- See available **generic color** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-color).
+- [See available **border color** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-border-color)
+- [See available **generic color** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-color)
 
 ---
 
@@ -44,10 +41,8 @@ Border colors should match SLDS border or generic color token values.
 
 Text colors should match SLDS text or generic color token values.
 
-- See available **text color** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-text-color).
-- See available **generic color** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-color).
+- [See available **text color** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-text-color)
+- [See available **generic color** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-color)
 
 ---
 
@@ -55,8 +50,7 @@ Text colors should match SLDS text or generic color token values.
 
 Text sizes should match SLDS font size token values.
 
-- See available **font size** tokens
-  [here](https://www.lightningdesignsystem.com/design-tokens/#category-font-size).
+- [See available **font size** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-font-size)
 
 ---
 
@@ -64,5 +58,4 @@ Text sizes should match SLDS font size token values.
 
 All text should use the Salesforce Sans font family.
 
-- Download Salesforce Sans from
-  [Github](https://github.com/salesforce-ux/design-system/tree/master/assets/fonts).
+- [Download Salesforce Sans from Github.](https://github.com/salesforce-ux/design-system/tree/master/assets/fonts)

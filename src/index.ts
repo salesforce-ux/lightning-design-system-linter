@@ -3,25 +3,6 @@ import _ from 'lodash'
 
 import { getBackgroundColors, getBorderColors, getTextColors, getFontSizes } from './token-utils'
 
-const SLDS_RELEASE = "Winter '21"
-
-// parse rgba syntax and populate array
-const parseColors = (rawTokens: Array<string>) =>
-  rawTokens.map((key: string) => {
-    let split = key.split(',').map((attr: string) =>
-      parseFloat(
-        attr
-          .replace(/rgba|rgb/g, '')
-          .replace(/\(/g, '')
-          .replace(/\)/g, ''),
-      ),
-    )
-
-    // add alpha of 1
-    if (split.length < 4) split.push(1)
-    return split
-  })
-
 // turn rgba percentages into values
 const getRgba = (colorObj: any) => {
   return [
@@ -49,7 +30,7 @@ const isValidLayer = (layer: any, _utils: RuleUtils) => {
   )
 }
 
-const tokenDescription = `We recommend using predefined values represented by our design tokens wherever possible. This linter version is using the ${SLDS_RELEASE} set of design tokens.`
+const tokenDescription = `We recommend using predefined values represented by our design tokens wherever possible.`
 
 const textSldsFont: RuleDefinition = {
   rule: async (context) => {
@@ -85,14 +66,14 @@ const textSldsSize: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/text-size',
-  title: `Text sizes should match SLDS font size token values. (${SLDS_RELEASE})`,
+  title: `Text sizes should match SLDS font size token values.`,
   description: tokenDescription,
 }
 
 const borderSldsColor: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
-    const borderColorValues = parseColors(getBorderColors())
+    const borderColorValues = getBorderColors()
 
     for (const layer of utils.objects.anyLayer) {
       const borders = layer.style?.borders
@@ -116,7 +97,7 @@ const borderSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/border-color',
-  title: `Border colors should match SLDS border or generic color token values. (${SLDS_RELEASE})`,
+  title: `Border colors should match SLDS border or generic color token values.`,
   description: tokenDescription,
 }
 
@@ -124,7 +105,7 @@ const fillSldsColor: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
 
-    const backgroundColorValues = parseColors(getBackgroundColors())
+    const backgroundColorValues = getBackgroundColors()
 
     for (const layer of utils.objects.anyLayer) {
       const fills = layer.style?.fills
@@ -148,14 +129,14 @@ const fillSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/fill-color',
-  title: `Fill colors should match SLDS background or generic color token values. (${SLDS_RELEASE})`,
+  title: `Fill colors should match SLDS background or generic color token values.`,
   description: tokenDescription,
 }
 
 const textSldsColor: RuleDefinition = {
   rule: async (context) => {
     const { utils } = context
-    const textColorValues = parseColors(getTextColors())
+    const textColorValues = getTextColors()
 
     for (const layer of utils.objects.text) {
       let colorAttribute =
@@ -174,7 +155,7 @@ const textSldsColor: RuleDefinition = {
     }
   },
   name: 'lightning-design-system-linter/text-color',
-  title: `Text colors should match SLDS text or generic color token values. (${SLDS_RELEASE})`,
+  title: `Text colors should match SLDS text or generic color token values.`,
   description: tokenDescription,
 }
 

@@ -2,30 +2,49 @@ import * as primitiveTokens from './design-tokens/primitive.json'
 import * as actionIconTokens from './design-tokens/bg-actions.json'
 import * as standardIconTokens from './design-tokens/bg-standard.json'
 import * as customIconTokens from './design-tokens/bg-custom.json'
+import * as newPaletteValues from './design-tokens/new-palette.json'
 
-const getGenericColors = () =>
-  primitiveTokens.properties.filter((p) => p.category === 'color').map((p) => p.value)
+import parseColor from 'parse-color'
 
-export const getBackgroundColors = () =>
-  primitiveTokens.properties
-    .filter((p) => p.category === 'background-color')
+interface Palette {
+  [key: string]: string
+}
+
+const parseColors = (value: string) => parseColor(value).rgba
+
+const getGenericColors = () => getPrimitvesForCategory('color')
+
+const getNewPalette = () =>
+  Object.keys(newPaletteValues)
+    .filter((k) => k !== 'default')
+    .map((k) => (newPaletteValues as Palette)[k])
+
+const getPrimitvesForCategory = (category: string) =>
+  primitiveTokens.properties.filter((p) => p.category === category).map((p) => p.value)
+
+const getIconBackgroundColors = () =>
+  actionIconTokens.properties
     .map((p) => p.value)
-    .concat(actionIconTokens.properties.map((p) => p.value))
     .concat(standardIconTokens.properties.map((p) => p.value))
     .concat(customIconTokens.properties.map((p) => p.value))
+
+export const getBackgroundColors = () =>
+  getPrimitvesForCategory('background-color')
+    .concat(getIconBackgroundColors())
     .concat(getGenericColors())
+    .concat(getNewPalette())
+    .map(parseColors)
 
 export const getBorderColors = () =>
-  primitiveTokens.properties
-    .filter((p) => p.category === 'border-color')
-    .map((p) => p.value)
+  getPrimitvesForCategory('border-color')
     .concat(getGenericColors())
+    .concat(getNewPalette())
+    .map(parseColors)
 
 export const getTextColors = () =>
-  primitiveTokens.properties
-    .filter((p) => p.category === 'text-color')
-    .map((p) => p.value)
+  getPrimitvesForCategory('text-color')
     .concat(getGenericColors())
+    .concat(getNewPalette())
+    .map(parseColors)
 
-export const getFontSizes = () =>
-  primitiveTokens.properties.filter((p) => p.category === 'font-size').map((p) => p.value)
+export const getFontSizes = () => getPrimitvesForCategory('font-size')
