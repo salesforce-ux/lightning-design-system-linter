@@ -1,21 +1,20 @@
 # Lightning Design System Linter for Sketch
 
-This assistant lints text colors, border colors, fills, text sizes, and font families against the
-Winter '21 version of the Salesforce Lightning Design System
-[design tokens](https://www.lightningdesignsystem.com/design-tokens/).
+This Sketch assistant validates document text colors, border colors, fill colors, text sizes, and font families against the the Salesforce Lightning Design System [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
 
 ## About Sketch Assistants
 
 First time using a Sketch Assistant?
-[Read Sketch's help documentation](https://www.sketch.com/docs/assistants/).
+[Read Sketch's help documentation.](https://www.sketch.com/docs/assistants/)
 
 ## Versions
 
 Make sure you are validating against the correct SLDS release.
 
-| Linter Version | SLDS Release    | URL (Copy and paste in browser to download.)                                                                                                      |
+| Linter Version | SLDS Token Set    | URL (Copy and paste in browser to download.)                                                                                                      |
 | -------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.0.5          | Winter '21 Only | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.5.tgz |
+| 1.1.0          | Winter '21 + new color palette | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/<br/>-/lightning-design-system-linter-1.1.0.tgz |
+| 1.0.5          | Winter '21 | sketch://add-assistant?url=<br/>h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/<br/>-/lightning-design-system-linter-1.0.5.tgz |
 
 ## Linter Rules
 
