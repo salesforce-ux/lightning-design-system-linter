@@ -11,10 +11,10 @@ First time using a Sketch Assistant?
 
 Make sure you are validating against the correct SLDS release. Copy and paste the corresponding linter URL in a browser window to download.
 
-#### Winter '21 + new color palette:
+### Winter '21 + new color palette:
 **linter version:** 1.1.1<br/>
 **url:** sketch://add-assistant?url=h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.1.1.tgz
-#### Winter '21 only:
+### Winter '21 only:
 **linter version:** 1.0.5<br/>
 **url:** sketch://add-assistant?url=h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.5.tgz
 
