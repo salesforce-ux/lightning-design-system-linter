@@ -18,6 +18,8 @@ Make sure you are validating against the correct SLDS release. Copy and paste th
 **linter version:** 1.0.5<br/>
 **url:** sketch://add-assistant?url=h<span>tt</span>ps://registry.npmjs.org/lightning-design-system-linter/-/lightning-design-system-linter-1.0.5.tgz
 
+---
+
 ## Linter Rules
 
 <h3 id='lightning-design-system-linter/fill-color'>Fill Color</h3>
