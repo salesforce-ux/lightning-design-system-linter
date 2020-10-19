@@ -1,7 +1,7 @@
 {
   "name": "lightning-design-system-linter",
   "homepage": "https://github.com/salesforce-ux/lightning-design-system-linter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/index.js",
   "sketch": "dist/sketch.js",
   "license": "MIT",
