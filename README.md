@@ -54,11 +54,3 @@ Text colors should match SLDS text or generic color token values.
 Text sizes should match SLDS font size token values.
 
 - [See available **font size** tokens.](https://www.lightningdesignsystem.com/design-tokens/#category-font-size)
-
----
-
-<h3 id='lightning-design-system-linter/font'>Font Family</h3>
-
-All text should use the Salesforce Sans font family.
-
-- [Download Salesforce Sans from Github.](https://github.com/salesforce-ux/design-system/tree/master/assets/fonts)
