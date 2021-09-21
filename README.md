@@ -1,6 +1,6 @@
 # Lightning Design System Linter for Sketch
 
-This Sketch assistant validates document text colors, border colors, fill colors, text sizes, and font families against the Salesforce Lightning Design System [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
+This Sketch assistant validates document text colors, border colors, fill colors, and text sizes against the Salesforce Lightning Design System [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
 
 ## About Sketch Assistants
 
