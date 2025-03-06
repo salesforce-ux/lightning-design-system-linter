@@ -1,3 +1,5 @@
+⚠️ This repository has been archived and is no longer maintained. Please use [slds-linter](https://github.com/salesforce-ux/slds-linter) instead.
+
 # Lightning Design System Linter for Sketch
 
 This Sketch assistant validates document text colors, border colors, fill colors, and text sizes against the Salesforce Lightning Design System [design tokens](https://www.lightningdesignsystem.com/design-tokens/).
